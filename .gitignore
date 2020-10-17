@@ -1,0 +1,7 @@
+env
+.idea
+**/*.pyc
+*.xlsx
+*.csv
+config.ini
+localdb.dump/

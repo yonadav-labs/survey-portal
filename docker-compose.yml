@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  database:
+    image: postgres:12.4-alpine
+    container_name: moss-postgres
+    hostname: moss-postgres
+    environment:
+      POSTGRES_DB: moss_db
+      POSTGRES_USER: moss
+      POSTGRES_PASSWORD: M0sspass
+    volumes:
+      - ./localdb.dump:/docker-entrypoint-initdb.d/localdb.dump
+    ports:
+      - "5432:5432"
+  server:
+    build: .
+    command: /bin/sh /app/shell.sh
+    links:
+      - database
+    depends_on:
+      - database
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
