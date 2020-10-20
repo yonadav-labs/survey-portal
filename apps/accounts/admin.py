@@ -65,7 +65,6 @@ class EmailUserAdmin(UserAdmin):
     ordering = ('first_name',)
     list_filter = ('is_active',)
     autocomplete_fields = ('representative',)
-    # readonly_fields = ('image_tag',)
     list_display = ('email', 'first_name', 'last_name', 'phone', 'is_superuser')
     search_fields = ('email', 'last_name', 'first_name')
     add_fieldsets = (
