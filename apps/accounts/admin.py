@@ -78,7 +78,8 @@ class EmailUserAdmin(UserAdmin):
         ('User Info', {
             'fields': (
                 'email', 'password',
-                ('first_name', 'last_name'),
+                ('last_login', 'date_joined'),
+                ('first_name', 'middle_name', 'last_name'),
                 ('phone',),
                 'is_active',
             ),
@@ -86,7 +87,9 @@ class EmailUserAdmin(UserAdmin):
         ('Roles', {
             'fields': (
                 'is_superuser',
-                'representative'
+                'representative',
+                'groups',
+                'user_permissions'
             ),
         })
     )
