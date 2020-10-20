@@ -3,7 +3,8 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+
+from apps.representatives.models import Representative
 
 
 class EmailUserManager(BaseUserManager):
@@ -22,26 +23,20 @@ class EmailUserManager(BaseUserManager):
 
 
 class EmailUser(AbstractBaseUser, PermissionsMixin):
-    # Use a UUID for a primary key
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
-    # User information
-    email = models.EmailField(_('email address'), unique=True, blank=False)
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    middle_initial = models.CharField(_('middle initial'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    email = models.EmailField(unique=True, blank=False)
+    first_name = models.CharField(max_length=30, blank=True)
+    middle_name = models.CharField("Middle Initial", max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
     phone = models.CharField(max_length=16, blank=True, verbose_name='Phone number')
     is_active = models.BooleanField(default=True, verbose_name='Active')
-
-    # Account Validation
-    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    date_joined = models.DateTimeField(default=timezone.now)
+    representative = models.ForeignKey(Representative, on_delete=models.SET_NULL, blank=True, null=True)
 
     USERNAME_FIELD = 'email'
 
     class Meta:
         ordering = ('first_name', 'last_name', )
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
 
     objects = EmailUserManager()
 
