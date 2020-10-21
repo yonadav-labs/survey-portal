@@ -16,8 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from apps.core import views as core_views
+from apps.representatives import views as rep_views
+
+
 urlpatterns = [
-    path('', include('apps.core.urls')),
+    path('', core_views.index, name='index'),
+    path('/representatives', rep_views.list, name='index'),
     path('superpanel/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
 ]
