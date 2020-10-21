@@ -124,9 +124,7 @@
               <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                   aria-expanded="false">
-                  <span>
-                    <span class="account-user-name">dominic.keller@gmail.com</span>
-                  </span>
+                  <span class="account-user-name">dominic.keller@gmail.com</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
                   <!-- item-->
@@ -154,32 +152,21 @@
             <button class="button-menu-mobile open-left disable-btn">
               <i class="mdi mdi-menu"></i>
             </button>
-            {% block app_title %}
-            <h4 class="mt-3">Dashboard</h4>
-            {% endblock %}
+
+            <div class="page-title-box">
+              {% block breadcrumb %}
+                <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item"><a href="javascript: void(0);">Moss</a></li>
+                  <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                  <li class="breadcrumb-item active">Starter</li>
+                </ol>
+              {% endblock %}
+            </div>
           </div>
           <!-- end Topbar -->
           
           <!-- Start Content-->
-          <div class="container-fluid">
-            <!-- start page title -->
-            <div class="row">
-              <div class="col-12">
-                <div class="page-title-box">
-                  <div class="mt-2">
-                    {% block breadcrumb %}
-                    <ol class="breadcrumb m-0">
-                      <li class="breadcrumb-item"><a href="javascript: void(0);">Moss</a></li>
-                      <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
-                      <li class="breadcrumb-item active">Starter</li>
-                    </ol>
-                    {% endblock %}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- end page title -->
-
+          <div class="container-fluid mt-3">
             {% block content %}
             {% endblock %}
           </div>
