@@ -30,3 +30,6 @@ class Representative(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
     def full_name(self):
         name = f'{self.first_name} {self.last_name}' if not self.middle_name else f'{self.first_name} {self.middle_name} {self.last_name}'
         return name 
+
+    def __str__(self):
+        return self.email
