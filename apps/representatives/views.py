@@ -40,12 +40,14 @@ class RepresentativeDetail(DetailView):
 class RepresentativeCreate(CreateView):
     model = Representative
     fields = '__all__'
+    success_url = reverse_lazy('representatives:list')
 
 
 class RepresentativeUpdate(UpdateView):
     model = Representative
     fields = '__all__'
     context_object_name = 'entity'
+    success_url = reverse_lazy('representatives:list')
 
 
 class RepresentativeDelete(DeleteView):
