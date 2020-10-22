@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Representative Details #{{entity.id}}</h5>
+    </div>
+    <div class="card-body">
+    <dl class="row">
+      <dt class="col-sm-3">First Name</dt>
+      <dd class="col-sm-9">{{ entity.first_name }}</dd>
+      <dt class="col-sm-3">last Name</dt>
+      <dd class="col-sm-9">{{ entity.last_name }}</dd>
+      <dt class="col-sm-3">Email</dt>
+      <dd class="col-sm-9">{{ entity.email }}</dd>
+    </dl>
+
+    </div>
+</div>
+
+{% endblock %}

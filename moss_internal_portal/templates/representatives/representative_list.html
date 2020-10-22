@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table class="table">
+    <tr>
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Status</th>
+                <th scope="col">Work Group</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities  %}
+            <tr>
+                <td><a href="{% url 'representatives:detail' entity.id %}">{{entity.first_name}}</a></td>
+                <td>{{entity.last_name}}</td>
+                <td>{{entity.email}}</td>
+                <td>{{entity.status}}</td>
+                <td>{{entity.workgroup}}</td>
+                <th>
+                    <a href="{% url 'representatives:update' entity.id %}" class="btn btn-sm btn-info">Update</a>
+                    <a href="{% url 'representatives:delete' entity.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
+{% if is_paginated %}
+    {% include "_pagination.html" %}
+{% endif %}
+
+{% endblock %}

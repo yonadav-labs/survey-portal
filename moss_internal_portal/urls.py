@@ -22,7 +22,7 @@ from apps.representatives import views as rep_views
 
 urlpatterns = [
     path('', core_views.index, name='index'),
-    path('/representatives', rep_views.list, name='index'),
+    path('representatives/', include('apps.representatives.urls')),
     path('superpanel/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
 ]
