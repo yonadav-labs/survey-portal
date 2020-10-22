@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="text-lg-right">
-                            <a type="button" href="{% url 'representatives:create' %}" class="btn btn-danger mb-2 mr-2"><i class="mdi mdi-basket mr-1"></i> Add New</a>
+                            <a type="button" href="{% url 'representatives:create' %}" class="btn btn-danger mb-2 mr-2"><i class="mdi mdi-plus-circle mr-1"></i> Add New</a>
                             <!-- <button type="button" class="btn btn-light mb-2">Export</button> -->
                         </div>
                     </div><!-- end col-->
@@ -41,7 +41,7 @@
                                         <label class="custom-control-label" for="customCheck1">&nbsp;</label>
                                     </div>
                                 </th>
-
+                                <!-- <th scope="col">ID</th> -->
                                 <th scope="col">First Name</th>
                                 <th scope="col">Last Name</th>
                                 <th scope="col">Email</th>
@@ -59,7 +59,8 @@
                                         <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                     </div>
                                 </td>
-                                <td><a href="{% url 'representatives:detail' entity.id %}">{{entity.first_name}}</a></td>
+                                <!-- <td><a href="{% url 'representatives:detail' entity.id %}" class="text-body font-weight-bold">{{entity.id}}</a> </td> -->
+                                <td>{{entity.first_name}}</td>
                                 <td>{{entity.last_name}}</td>
                                 <td>{{entity.email}}</td>
                                 <td><span class="badge badge-info-lighten">{{entity.status}}</span></td>

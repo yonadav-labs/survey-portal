@@ -4,34 +4,34 @@
 
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title">Representative Details ({{entity}})</h5>
+      <h4 class="card-title my-1">Representative Details ({{entity}})</h4>
     </div>
     <div class="card-body">
       <dl class="row">
-        <dt class="col-sm-3">First Name</dt>
+        <dt class="col-sm-3 col-lg-2 mb-2">First Name</dt>
         <dd class="col-sm-9">{{ entity.first_name }}</dd>
-        <dt class="col-sm-3">Middle Initial</dt>
+        <dt class="col-sm-3 col-lg-2 mb-2">Middle Initial</dt>
         <dd class="col-sm-9">{% if entity.middle_name %}{{ entity.middle_name }}{% endif %}</dd>
-        <dt class="col-sm-3">last Name</dt>
+        <dt class="col-sm-3 col-lg-2 mb-2">last Name</dt>
         <dd class="col-sm-9">{{ entity.last_name }}</dd>
-        <dt class="col-sm-3">Email</dt>
+        <dt class="col-sm-3 col-lg-2 mb-2">Email</dt>
         <dd class="col-sm-9">{{ entity.email }}</dd>
-        <dt class="col-sm-3">Type</dt>
+        <dt class="col-sm-3 col-lg-2 mb-2">Type</dt>
         <dd class="col-sm-9">{% if entity.type %}{{ entity.type }}{% endif %}</dd>
-        <dt class="col-sm-3">Status</dt>
+        <dt class="col-sm-3 col-lg-2 mb-2">Status</dt>
         <dd class="col-sm-9">{{ entity.status }}</dd>
-        <dt class="col-sm-3">Status Date</dt>
+        <dt class="col-sm-3 col-lg-2 mb-2">Status Date</dt>
         <dd class="col-sm-9">{{ entity.last_status_date }}</dd>
-        <dt class="col-sm-3">Last Hire Date</dt>
+        <dt class="col-sm-3 col-lg-2 mb-2">Last Hire Date</dt>
         <dd class="col-sm-9">{{ entity.last_hire_date }}</dd>
-        <dt class="col-sm-3">Division</dt>
+        <dt class="col-sm-3 col-lg-2 mb-2">Division</dt>
         <dd class="col-sm-9">{% if entity.division %}{{ entity.division }}{% endif %}</dd>
-        <dt class="col-sm-3">Department</dt>
+        <dt class="col-sm-3 col-lg-2 mb-2">Department</dt>
         <dd class="col-sm-9">{% if entity.department %}{{ entity.department }}{% endif %}</dd>
-        <dt class="col-sm-3">Work Group</dt>
+        <dt class="col-sm-3 col-lg-2 mb-2">Work Group</dt>
         <dd class="col-sm-9">{{ entity.workgroup }}</dd>
       </dl>
-      <a href="{% url 'representatives:list' %}" class="btn btn-light btn-sm">Back</a>
+      <a href="{% url 'representatives:list' %}" class="btn btn-secondary btn-sm">Back</a>
     </div>
 </div>
 
