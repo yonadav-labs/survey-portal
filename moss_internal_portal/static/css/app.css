@@ -8409,7 +8409,10 @@ body {
   font-weight: 700; }
 
 .side-nav .mm-active > a {
-  color: #ffffff !important; }
+  color: #ffffff !important; 
+  font-weight: bold;
+  font-size: 0.94rem;
+}
 
 body[data-leftbar-compact-mode="condensed"] {
   min-height: 1600px; }
