@@ -146,17 +146,15 @@
               <i class="mdi mdi-menu"></i>
             </button>
 
+
             <div class="page-title-box">
               {% block breadcrumb %}
-                <ol class="breadcrumb m-0">
-                  <li class="breadcrumb-item"><a href="javascript: void(0);">Moss</a></li>
-                  <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
-                  <li class="breadcrumb-item active">Starter</li>
-                </ol>
               {% endblock %}
             </div>
           </div>
           <!-- end Topbar -->
+          
+          {% include 'messages.html' %}
           
           <!-- Start Content-->
           <div class="container-fluid mt-3">
