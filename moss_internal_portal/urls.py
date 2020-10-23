@@ -21,7 +21,8 @@ from apps.representatives import views as rep_views
 
 
 urlpatterns = [
-    path('', core_views.index, name='index'),
+    path('', core_views.HomeView.as_view(), name='index'),
+    path('', include('apps.accounts.urls')),
     path('representatives/', include('apps.representatives.urls')),
     path('superpanel/', admin.site.urls),
     path('accounts/', include('allauth.urls')),

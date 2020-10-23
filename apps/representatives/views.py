@@ -11,6 +11,7 @@ from .models import Representative
 
 class RepresentativeList(LoginRequiredMixin, ListView):
     model = Representative
+    login_url = '/login'
     context_object_name = 'entities'
     paginate_by = 10
 
@@ -34,30 +35,34 @@ class RepresentativeList(LoginRequiredMixin, ListView):
         return context
 
 
-class RepresentativeDetail(DetailView):
+class RepresentativeDetail(LoginRequiredMixin, DetailView):
     model = Representative
     context_object_name = 'entity'
+    login_url = '/login'
 
 
-class RepresentativeCreate(SuccessMessageMixin, CreateView):
+class RepresentativeCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Representative
     fields = '__all__'
     success_url = reverse_lazy('representatives:list')
     success_message = 'Representative created successfully.'
+    login_url = '/login'
 
 
-class RepresentativeUpdate(SuccessMessageMixin, UpdateView):
+class RepresentativeUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Representative
     fields = '__all__'
     context_object_name = 'entity'
     success_url = reverse_lazy('representatives:list')
     success_message = 'Representative updated successfully.'
+    login_url = '/login'
 
 
-class RepresentativeDelete(DeleteView):
+class RepresentativeDelete(LoginRequiredMixin, DeleteView):
     model = Representative
     success_url = reverse_lazy('representatives:list')
     success_message = 'Representative deleted successfully.'
+    login_url = '/login'
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)

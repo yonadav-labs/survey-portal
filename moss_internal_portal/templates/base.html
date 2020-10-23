@@ -118,7 +118,7 @@
               <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                   aria-expanded="false">
-                  <span class="account-user-name">dominic.keller@gmail.com</span>
+                  <span class="account-user-name">{{user.email}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
                   <!-- item-->
@@ -134,7 +134,7 @@
                   </a>
 
                   <!-- item-->
-                  <a href="javascript:void(0);" class="dropdown-item notify-item">
+                  <a href="/logout" class="dropdown-item notify-item">
                     <i class="mdi mdi-logout mr-1"></i>
                     <span>Logout</span>
                   </a>
@@ -155,7 +155,7 @@
           <!-- end Topbar -->
           
           {% include 'messages.html' %}
-          
+
           <!-- Start Content-->
           <div class="container-fluid mt-3">
             {% block content %}
