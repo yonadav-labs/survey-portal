@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
+{% block breadcrumb %}
+<ol class="breadcrumb m-0">
+  <li class="breadcrumb-item"><a href="/representatives/">Representatives</a></li>
+  <li class="breadcrumb-item active">{% if entity.id %}Edit{% else %}Create{% endif %}</li>
+</ol>
+{% endblock %}
+
+
 {% block content %}
 
 <div class="card">

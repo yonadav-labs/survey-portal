@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.contrib.messages.views import SuccessMessageMixin
 
 from .models import Representative
 
@@ -38,19 +39,26 @@ class RepresentativeDetail(DetailView):
     context_object_name = 'entity'
 
 
-class RepresentativeCreate(CreateView):
+class RepresentativeCreate(SuccessMessageMixin, CreateView):
     model = Representative
     fields = '__all__'
     success_url = reverse_lazy('representatives:list')
+    success_message = 'Representative created successfully.'
 
 
-class RepresentativeUpdate(UpdateView):
+class RepresentativeUpdate(SuccessMessageMixin, UpdateView):
     model = Representative
     fields = '__all__'
     context_object_name = 'entity'
     success_url = reverse_lazy('representatives:list')
+    success_message = 'Representative updated successfully.'
 
 
 class RepresentativeDelete(DeleteView):
     model = Representative
     success_url = reverse_lazy('representatives:list')
+    success_message = 'Representative deleted successfully.'
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(RepresentativeDelete, self).delete(request, *args, **kwargs)
