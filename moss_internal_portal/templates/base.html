@@ -19,6 +19,9 @@
     <link href="/static/css/app.css" rel="stylesheet" type="text/css" id="light-style" />
     <link href="/static/css/app-dark.css" rel="stylesheet" type="text/css" id="dark-style" />
 
+    {% block css %}
+    {% endblock %}
+
   </head>
 
   <body class="loading" data-layout-config='{"leftSideBarTheme":"default","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
@@ -201,9 +204,9 @@
     <script src="/static/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
     <script src="/static/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
     <!-- third party js ends -->
-
+    {% block js %}
+    {% endblock %}
     <!-- demo app -->
-    <script src="/static/js/pages/demo.dashboard.js"></script>
     <!-- end demo js-->
   </body>
 </html>
