@@ -15,25 +15,25 @@
             <div class="card-body">
                 <div class="row mb-2">
                     <div class="col-lg-8">
-                        <form class="form-inline">
+                        <form class="form-inline" method="GET">
                             <div class="form-group mb-2">
                                 <label for="inputPassword2" class="sr-only">Search</label>
-                                <input type="search" class="form-control" id="inputPassword2" placeholder="Search...">
+                                <input type="search" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="Search...">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
                                 <label for="status-select" class="mr-2">Status</label>
-                                <select class="custom-select" id="status-select">
-                                    <option selected>Choose...</option>
-                                    <option value="ACTIVE">Active</option>
-                                    <option value="TERMINATED">Terminated</option>
+                                <select class="custom-select" id="status-select" name="status">
+                                    <option value="">Choose...</option>
+                                    <option value="ACTIVE" {% if request.GET.status == "ACTIVE" %}selected{% endif %}>Active</option>
+                                    <option value="TERMINATED" {% if request.GET.status == "TERMINATED" %}selected{% endif %}>Terminated</option>
                                 </select>
                             </div>
+                            <button type="submit" class="btn btn-light mb-2">Search</button>
                         </form>
                     </div>
                     <div class="col-lg-4">
                         <div class="text-lg-right">
                             <a type="button" href="{% url 'representatives:create' %}" class="btn btn-danger mb-2 mr-2"><i class="mdi mdi-plus-circle mr-1"></i> Add New</a>
-                            <!-- <button type="button" class="btn btn-light mb-2">Export</button> -->
                         </div>
                     </div><!-- end col-->
                 </div>
@@ -53,6 +53,7 @@
                                 <th scope="col">Last Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Type</th>
+                                <th scope="col">Status Date</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Work Group</th>
                                 <th style="width: 125px;">Action</th>
@@ -72,7 +73,8 @@
                                 <td>{{entity.last_name}}</td>
                                 <td>{{entity.email}}</td>
                                 <td>{{entity.type|default:"-"}}</td>
-                                <td><span class="badge badge-info-lighten">{{entity.status}}</span></td>
+                                <td>{{entity.last_status_date}}</td>
+                                <td><span class="badge {% if entity.status == 'ACTIVE' %}badge-success-lighten{% else %}badge-danger-lighten{% endif %}">{{entity.status}}</span></td>
                                 <td>{{entity.workgroup}}</td>
                                 <td>
                                     <a href="{% url 'representatives:detail' entity.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>

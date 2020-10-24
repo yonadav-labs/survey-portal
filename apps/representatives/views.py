@@ -5,9 +5,11 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Q
 
 from .models import Representative
 from .forms import *
+
 
 class RepresentativeList(LoginRequiredMixin, ListView):
     model = Representative
@@ -16,7 +18,17 @@ class RepresentativeList(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Representative.objects.order_by('first_name')
+        keyword = self.request.GET.get('q', '')
+        status = self.request.GET.get('status', '')
+
+        q = Q(first_name__icontains=keyword) \
+          | Q(last_name__icontains=keyword) \
+          | Q(email__icontains=keyword)
+
+        if status:
+            q &= Q(status=status)
+
+        return Representative.objects.filter(q).order_by('first_name')
 
     def get_context_data(self, **kwargs):
         context = super(RepresentativeList, self).get_context_data(**kwargs)
