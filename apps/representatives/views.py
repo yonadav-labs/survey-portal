@@ -6,6 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
+from django.contrib.auth.decorators import permission_required
+from django.utils.decorators import method_decorator
 
 from .models import Representative
 from .forms import *
@@ -52,6 +54,10 @@ class RepresentativeDetail(LoginRequiredMixin, DetailView):
     context_object_name = 'entity'
     login_url = '/login'
 
+    @method_decorator(permission_required('representatives.view_representative', raise_exception=True))
+    def dispatch(self, request, *args, **kwargs):
+        return super(RepresentativeDetail, self).dispatch(request)
+
 
 class RepresentativeCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Representative
@@ -59,6 +65,10 @@ class RepresentativeCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = 'Representative created successfully.'
     login_url = '/login'
     form_class = RepresentativeForm
+
+    @method_decorator(permission_required('representatives.add_representative', raise_exception=True))
+    def dispatch(self, request, *args, **kwargs):
+        return super(RepresentativeCreate, self).dispatch(request)
 
 
 class RepresentativeUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -69,12 +79,20 @@ class RepresentativeUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = '/login'
     form_class = RepresentativeForm
 
+    @method_decorator(permission_required('representatives.change_representative', raise_exception=True))
+    def dispatch(self, request, *args, **kwargs):
+        return super(RepresentativeUpdate, self).dispatch(request)
+
 
 class RepresentativeDelete(LoginRequiredMixin, DeleteView):
     model = Representative
     success_url = reverse_lazy('representatives:list')
     success_message = 'Representative deleted successfully.'
     login_url = '/login'
+
+    @method_decorator(permission_required('representatives.delete_representative', raise_exception=True))
+    def dispatch(self, request, *args, **kwargs):
+        return super(RepresentativeDelete, self).dispatch(request)
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
