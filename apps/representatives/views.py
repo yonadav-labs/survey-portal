@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.messages.views import SuccessMessageMixin
 
 from .models import Representative
-
+from .forms import *
 
 class RepresentativeList(LoginRequiredMixin, ListView):
     model = Representative
@@ -43,19 +43,19 @@ class RepresentativeDetail(LoginRequiredMixin, DetailView):
 
 class RepresentativeCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Representative
-    fields = '__all__'
     success_url = reverse_lazy('representatives:list')
     success_message = 'Representative created successfully.'
     login_url = '/login'
+    form_class = RepresentativeForm
 
 
 class RepresentativeUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Representative
-    fields = '__all__'
     context_object_name = 'entity'
     success_url = reverse_lazy('representatives:list')
     success_message = 'Representative updated successfully.'
     login_url = '/login'
+    form_class = RepresentativeForm
 
 
 class RepresentativeDelete(LoginRequiredMixin, DeleteView):

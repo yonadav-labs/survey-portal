@@ -766,6 +766,7 @@ function($) {
         // date pickers
         $('[data-toggle="date-picker"]').each(function (idx, obj) {
             var objOptions = $.extend({}, defaultOptions, $(obj).data());
+            objOptions['locale'] = {format: 'YYYY-MM-DD'};
             $(obj).daterangepicker(objOptions);
         });
 
