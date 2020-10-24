@@ -20,6 +20,11 @@ from apps.core import views as core_views
 from apps.representatives import views as rep_views
 
 
+handler404 = 'apps.core.views.handler404'
+handler500 = 'apps.core.views.handler500'
+handler403 = 'apps.core.views.handler403'
+handler400 = 'apps.core.views.handler400'
+
 urlpatterns = [
     path('', core_views.HomeView.as_view(), name='index'),
     path('', include('apps.accounts.urls')),
