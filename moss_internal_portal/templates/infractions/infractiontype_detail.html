@@ -2,7 +2,8 @@
 
 {% block breadcrumb %}
 <ol class="breadcrumb m-0">
-  <li class="breadcrumb-item"><a href="/representatives/">Representatives</a></li>
+  <li class="breadcrumb-item"><a href="/infractions/">Infractions</a></li>
+  <li class="breadcrumb-item"><a href="/infractions/type">Types</a></li>
   <li class="breadcrumb-item active">Show</li>
 </ol>
 {% endblock %}
@@ -12,34 +13,22 @@
 
 <div class="card">
     <div class="card-header">
-      <h4 class="card-title my-1">Representative Details ({{entity}})</h4>
+      <h4 class="card-title my-1">Infraction Type Details ({{entity}})</h4>
     </div>
     <div class="card-body">
       <dl class="row">
-        <dt class="col-sm-3 col-lg-2 mb-2">First Name</dt>
-        <dd class="col-sm-9">{{ entity.first_name }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Middle Initial</dt>
-        <dd class="col-sm-9">{{ entity.middle_name|default:"-" }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">last Name</dt>
-        <dd class="col-sm-9">{{ entity.last_name }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Email</dt>
-        <dd class="col-sm-9">{{ entity.email }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Type</dt>
-        <dd class="col-sm-9">{{ entity.type|default:"-" }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Status</dt>
-        <dd class="col-sm-9">{{ entity.status }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Status Date</dt>
-        <dd class="col-sm-9">{{ entity.last_status_date }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Last Hire Date</dt>
-        <dd class="col-sm-9">{{ entity.last_hire_date }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Division</dt>
-        <dd class="col-sm-9">{{ entity.division|default:"-" }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Department</dt>
-        <dd class="col-sm-9">{{ entity.department|default:"-" }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Work Group</dt>
-        <dd class="col-sm-9">{{ entity.workgroup }}</dd>
+        <dt class="col-sm-3 col-lg-2 mb-2">Name</dt>
+        <dd class="col-sm-9">{{ entity.name }}</dd>
+        <dt class="col-sm-3 col-lg-2 mb-2">Points</dt>
+        <dd class="col-sm-9">{{ entity.points }}</dd>
+        <dt class="col-sm-3 col-lg-2 mb-2">WFH Days Forfeit</dt>
+        <dd class="col-sm-9">{{ entity.wfh_days_forfeit }}</dd>
+        <dt class="col-sm-3 col-lg-2 mb-2">Rolling Months</dt>
+        <dd class="col-sm-9">{{ entity.rolling_months }}</dd>
+        <dt class="col-sm-3 col-lg-2 mb-2">Enabled</dt>
+        <dd class="col-sm-9">{{ entity.enabled|yesno|title }}</dd>
       </dl>
-      <a href="{% url 'representatives:list' %}" class="btn btn-secondary btn-sm">Back</a>
+      <a href="{% url 'infractions:type-list' %}" class="btn btn-secondary btn-sm">Back</a>
     </div>
 </div>
 
