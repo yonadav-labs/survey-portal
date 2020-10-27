@@ -21,3 +21,6 @@ class Infraction(UUIDPrimaryKeyMixin):
     date = models.DateField()
     type = models.ForeignKey(InfractionType, on_delete=models.CASCADE, related_name="infractions")
     notes = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.representative} - {self.type}'
