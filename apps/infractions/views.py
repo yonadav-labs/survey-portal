@@ -108,7 +108,7 @@ class InfractionTypeList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         keyword = self.request.GET.get('q', '')
-        enabled = self.request.GET.get('enabled', '')
+        enabled = self.request.GET.get('enabled', '') == "true"
 
         q = Q(name__icontains=keyword)
 

@@ -2,7 +2,8 @@
 
 {% block breadcrumb %}
 <ol class="breadcrumb m-0">
-  <li class="breadcrumb-item"><a href="/representatives/">Representatives</a></li>
+  <li class="breadcrumb-item"><a href="/infractions/">Infractions</a></li>
+  <li class="breadcrumb-item"><a href="/infractions/type">Types</a></li>
   <li class="breadcrumb-item active">All</li>
 </ol>
 {% endblock %}
@@ -21,11 +22,11 @@
                                 <input type="search" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="Search...">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                                <label for="status-select" class="mr-2">Status</label>
-                                <select class="custom-select" id="status-select" name="status">
+                                <label for="status-select" class="mr-2">Enabled</label>
+                                <select class="custom-select" id="status-select" name="enabled">
                                     <option value="">Choose...</option>
-                                    <option value="ACTIVE" {% if request.GET.status == "ACTIVE" %}selected{% endif %}>Active</option>
-                                    <option value="TERMINATED" {% if request.GET.status == "TERMINATED" %}selected{% endif %}>Terminated</option>
+                                    <option value="true" {% if request.GET.status == "true" %}selected{% endif %}>Yes</option>
+                                    <option value="false" {% if request.GET.status == "false" %}selected{% endif %}>No</option>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-light mb-2">Search</button>
@@ -33,7 +34,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="text-lg-right">
-                            <a type="button" href="{% url 'representatives:create' %}" class="btn btn-primary mb-2 mr-2"><i class="mdi mdi-plus-circle mr-1"></i> Add New</a>
+                            <a type="button" href="{% url 'infractions:type-create' %}" class="btn btn-primary mb-2 mr-2"><i class="mdi mdi-plus-circle mr-1"></i> Add New</a>
                         </div>
                     </div><!-- end col-->
                 </div>
@@ -49,13 +50,11 @@
                                     </div>
                                 </th>
                                 <!-- <th scope="col">ID</th> -->
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Status Date</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Work Group</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Points</th>
+                                <th scope="col">WFH Days Forfeit</th>
+                                <th scope="col">Rolling Months</th>
+                                <th scope="col">Enabled</th>
                                 <th style="width: 125px;">Action</th>
                             </tr>
                         </thead>
@@ -68,18 +67,16 @@
                                         <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                     </div>
                                 </td>
-                                <!-- <td><a href="{% url 'representatives:detail' entity.id %}" class="text-body font-weight-bold">{{entity.id}}</a> </td> -->
-                                <td>{{entity.first_name}}</td>
-                                <td>{{entity.last_name}}</td>
-                                <td>{{entity.email}}</td>
-                                <td>{{entity.type|default:"-"}}</td>
-                                <td>{{entity.last_status_date}}</td>
-                                <td><span class="badge {% if entity.status == 'ACTIVE' %}badge-success-lighten{% else %}badge-danger-lighten{% endif %}">{{entity.status}}</span></td>
-                                <td>{{entity.workgroup}}</td>
+                                <!-- <td><a href="{% url 'infractions:detail' entity.id %}" class="text-body font-weight-bold">{{entity.id}}</a> </td> -->
+                                <td>{{entity.name}}</td>
+                                <td>{{entity.points}}</td>
+                                <td>{{entity.wfh_days_forfeit}}</td>
+                                <td>{{entity.rolling_months}}</td>
+                                <td><span class="badge {% if entity.enabled %}badge-success-lighten{% else %}badge-danger-lighten{% endif %}">{{entity.enabled|yesno}}</span></td>
                                 <td>
-                                    <a href="{% url 'representatives:detail' entity.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="{% url 'representatives:update' entity.id %}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="{% url 'representatives:delete' entity.id %}" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                    <a href="{% url 'infractions:type-detail' entity.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                    <a href="{% url 'infractions:type-update' entity.id %}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="{% url 'infractions:type-delete' entity.id %}" class="action-icon"> <i class="mdi mdi-delete"></i></a>
                                 </td>
                             </tr>
                             {% endfor %}
