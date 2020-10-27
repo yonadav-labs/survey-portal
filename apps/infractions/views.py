@@ -21,16 +21,13 @@ class InfractionList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         keyword = self.request.GET.get('q', '')
-        status = self.request.GET.get('status', '')
 
-        q = Q(first_name__icontains=keyword) \
-          | Q(last_name__icontains=keyword) \
-          | Q(email__icontains=keyword)
+        q = Q(representative__first_name__icontains=keyword) \
+          | Q(representative__last_name__icontains=keyword) \
+          | Q(representative__email__icontains=keyword) \
+          | Q(type__name__icontains=keyword)
 
-        if status:
-            q &= Q(status=status)
-
-        return Infraction.objects.filter(q).order_by('first_name')
+        return Infraction.objects.filter(q)
 
     def get_context_data(self, **kwargs):
         context = super(InfractionList, self).get_context_data(**kwargs)
