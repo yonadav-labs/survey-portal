@@ -3,7 +3,8 @@
 
 {% block breadcrumb %}
 <ol class="breadcrumb m-0">
-  <li class="breadcrumb-item"><a href="/representatives/">Representatives</a></li>
+  <li class="breadcrumb-item"><a href="/infractions/">Infractions</a></li>
+  <li class="breadcrumb-item"><a href="/infractions/type">Types</a></li>
   <li class="breadcrumb-item active">{% if entity.id %}Edit{% else %}Create{% endif %}</li>
 </ol>
 {% endblock %}
@@ -14,9 +15,9 @@
 <div class="card">
     <div class="card-header">
         {% if entity.id %}
-            <h4 class="card-title my-1">Update Representative</h4>
+            <h4 class="card-title my-1">Update Infraction Type</h4>
         {% else %}
-            <h4 class="card-title my-1">Create New Representative</h4>
+            <h4 class="card-title my-1">Create New Infraction Type</h4>
         {% endif %}
     </div>
     <div class="card-body">
@@ -32,7 +33,7 @@
                         <button type="submit" class="btn btn-success btn-sm">Create</button>
                     {% endif %}
 
-                    <a href="{% url 'representatives:list' %}" class="btn btn-light btn-sm ml-1">Cancel</a>
+                    <a href="{% url 'infractions:type-list' %}" class="btn btn-light btn-sm ml-1">Cancel</a>
                 </form>
                 
             </div>
