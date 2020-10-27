@@ -32,4 +32,4 @@ class Representative(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
         return name 
 
     def __str__(self):
-        return self.email
+        return f'{self.full_name} <{self.email}>'
