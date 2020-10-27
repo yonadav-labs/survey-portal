@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
 
-from .models import Infraction
+from .models import *
 from .forms import *
 
 
@@ -54,19 +54,19 @@ class InfractionDetail(LoginRequiredMixin, DetailView):
     context_object_name = 'entity'
     login_url = '/login'
 
-    @method_decorator(permission_required('representatives.view_representative', raise_exception=True))
+    @method_decorator(permission_required('infractions.view_representative', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(InfractionDetail, self).dispatch(request)
 
 
 class InfractionCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Infraction
-    success_url = reverse_lazy('representatives:list')
+    success_url = reverse_lazy('infractions:list')
     success_message = 'Infraction created successfully.'
     login_url = '/login'
     form_class = InfractionForm
 
-    @method_decorator(permission_required('representatives.add_representative', raise_exception=True))
+    @method_decorator(permission_required('infractions.add_representative', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(InfractionCreate, self).dispatch(request)
 
@@ -74,23 +74,23 @@ class InfractionCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class InfractionUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Infraction
     context_object_name = 'entity'
-    success_url = reverse_lazy('representatives:list')
+    success_url = reverse_lazy('infractions:list')
     success_message = 'Infraction updated successfully.'
     login_url = '/login'
     form_class = InfractionForm
 
-    @method_decorator(permission_required('representatives.change_representative', raise_exception=True))
+    @method_decorator(permission_required('infractions.change_representative', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(InfractionUpdate, self).dispatch(request)
 
 
 class InfractionDelete(LoginRequiredMixin, DeleteView):
     model = Infraction
-    success_url = reverse_lazy('representatives:list')
+    success_url = reverse_lazy('infractions:list')
     success_message = 'Infraction deleted successfully.'
     login_url = '/login'
 
-    @method_decorator(permission_required('representatives.delete_representative', raise_exception=True))
+    @method_decorator(permission_required('infractions.delete_representative', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(InfractionDelete, self).dispatch(request)
 
@@ -99,6 +99,7 @@ class InfractionDelete(LoginRequiredMixin, DeleteView):
         return super(InfractionDelete, self).delete(request, *args, **kwargs)
 
 
+# Infraction Type Views
 class InfractionTypeList(LoginRequiredMixin, ListView):
     model = Infraction
     login_url = '/login'
@@ -107,19 +108,17 @@ class InfractionTypeList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         keyword = self.request.GET.get('q', '')
-        status = self.request.GET.get('status', '')
+        enabled = self.request.GET.get('enabled', '')
 
-        q = Q(first_name__icontains=keyword) \
-          | Q(last_name__icontains=keyword) \
-          | Q(email__icontains=keyword)
+        q = Q(name__icontains=keyword)
 
-        if status:
-            q &= Q(status=status)
+        if enabled:
+            q &= Q(enabled=enabled)
 
-        return Infraction.objects.filter(q).order_by('first_name')
+        return InfractionType.objects.filter(q).order_by('name')
 
     def get_context_data(self, **kwargs):
-        context = super(InfractionList, self).get_context_data(**kwargs)
+        context = super(InfractionTypeList, self).get_context_data(**kwargs)
         entities = self.get_queryset()
         page = self.request.GET.get('page')
         paginator = Paginator(entities, self.paginate_by)
@@ -136,47 +135,47 @@ class InfractionTypeList(LoginRequiredMixin, ListView):
 
 
 class InfractionTypeDetail(LoginRequiredMixin, DetailView):
-    model = Infraction
+    model = InfractionType
     context_object_name = 'entity'
     login_url = '/login'
 
-    @method_decorator(permission_required('representatives.view_representative', raise_exception=True))
+    @method_decorator(permission_required('infractions.view_representative', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(InfractionDetail, self).dispatch(request)
 
 
 class InfractionTypeCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Infraction
-    success_url = reverse_lazy('representatives:list')
+    model = InfractionType
+    success_url = reverse_lazy('infractions:list')
     success_message = 'Infraction created successfully.'
     login_url = '/login'
-    form_class = InfractionForm
+    # form_class = InfractionForm
 
-    @method_decorator(permission_required('representatives.add_representative', raise_exception=True))
+    @method_decorator(permission_required('infractions.add_representative', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(InfractionCreate, self).dispatch(request)
 
 
 class InfractionTypeUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Infraction
+    model = InfractionType
     context_object_name = 'entity'
-    success_url = reverse_lazy('representatives:list')
+    success_url = reverse_lazy('infractions:list')
     success_message = 'Infraction updated successfully.'
     login_url = '/login'
-    form_class = InfractionForm
+    # form_class = InfractionForm
 
-    @method_decorator(permission_required('representatives.change_representative', raise_exception=True))
+    @method_decorator(permission_required('infractions.change_representative', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(InfractionUpdate, self).dispatch(request)
 
 
 class InfractionTypeDelete(LoginRequiredMixin, DeleteView):
-    model = Infraction
-    success_url = reverse_lazy('representatives:list')
+    model = InfractionType
+    success_url = reverse_lazy('infractions:list')
     success_message = 'Infraction deleted successfully.'
     login_url = '/login'
 
-    @method_decorator(permission_required('representatives.delete_representative', raise_exception=True))
+    @method_decorator(permission_required('infractions.delete_representative', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(InfractionDelete, self).dispatch(request)
 
