@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb m-0">
+  <li class="breadcrumb-item"><a href="/representatives/">Representatives</a></li>
+  <li class="breadcrumb-item active">Delete</li>
+</ol>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title my-1">Delete Representative ({{object.email}})</h4>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="alert alert-warning" role="alert">
+                Are you sure you want to delete <strong>{{ object }}</strong> ?
+            </div>
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            <a href="{% url 'representatives:list' %}" class="btn btn-light btn-sm ml-1">Cancel</a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
