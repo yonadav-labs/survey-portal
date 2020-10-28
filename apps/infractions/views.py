@@ -51,7 +51,7 @@ class InfractionDetail(LoginRequiredMixin, DetailView):
     context_object_name = 'entity'
     login_url = '/login'
 
-    @method_decorator(permission_required('infractions.view_representative', raise_exception=True))
+    @method_decorator(permission_required('infractions.view_infraction', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(InfractionDetail, self).dispatch(request)
 
@@ -63,7 +63,7 @@ class InfractionCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     login_url = '/login'
     form_class = InfractionForm
 
-    @method_decorator(permission_required('infractions.add_representative', raise_exception=True))
+    @method_decorator(permission_required('infractions.add_infraction', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(InfractionCreate, self).dispatch(request)
 
@@ -76,7 +76,7 @@ class InfractionUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = '/login'
     form_class = InfractionForm
 
-    @method_decorator(permission_required('infractions.change_representative', raise_exception=True))
+    @method_decorator(permission_required('infractions.change_infraction', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(InfractionUpdate, self).dispatch(request)
 
@@ -87,7 +87,7 @@ class InfractionDelete(LoginRequiredMixin, DeleteView):
     success_message = 'Infraction deleted successfully.'
     login_url = '/login'
 
-    @method_decorator(permission_required('infractions.delete_representative', raise_exception=True))
+    @method_decorator(permission_required('infractions.delete_infraction', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(InfractionDelete, self).dispatch(request)
 
