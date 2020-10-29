@@ -1,25 +1,17 @@
-from allauth.account.adapter import DefaultAccountAdapter
+from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 
 from .models import EmailUser
 
-class CustomAccountAdapter(DefaultAccountAdapter):
+class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
 
-    def is_open_for_signup(self, request):
-        """
-        Checks whether or not the site is open for signups.
-
-        Next to simply returning True/False you can also intervene the
-        regular flow by raising an ImmediateHttpResponse
-
-        (Comment reproduced from the overridden method.)
-        """
-        try:
-            email = request.session.get('socialaccount_sociallogin').get('user').get('email')
+    def is_auto_signup_allowed(self, request, sociallogin):
+        auto_signup = False
+        email = getattr(sociallogin.user, "email")
+        # Let's check if auto_signup is really possible...
+        if email:
             user = EmailUser.objects.filter(email=email).first()
             if user:
                 user.delete()
-                return True
-        except Exception as e:
-            pass
+                auto_signup = True
 
-        return False
+        return auto_signup
