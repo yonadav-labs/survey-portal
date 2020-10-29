@@ -6,3 +6,4 @@ env
 config.ini
 localdb.dump/
 __pycache__
+*.sqlite3

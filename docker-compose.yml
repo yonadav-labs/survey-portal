@@ -23,3 +23,5 @@ services:
       - .:/app
     ports:
       - "8000:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: moss_internal_portal.settings.local
