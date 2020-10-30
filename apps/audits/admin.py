@@ -1,38 +1,39 @@
 from django.contrib import admin
+from import_export.admin import ImportExportMixin
 
 from .models import *
 
 
-class ChoiceAnswerAdmin(admin.ModelAdmin):
+class ChoiceAnswerAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('name', 'enabled', 'category')
     search_fields = ('name',)
     list_filter = ('enabled', 'category')
 
 
-class QuestionAdmin(admin.ModelAdmin):
+class QuestionAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('name', 'type', 'enabled', 'category')
     list_filter = ('type', 'enabled', 'category')
     search_fields = ('name',)
 
 
-class TemplateAdmin(admin.ModelAdmin):
+class TemplateAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('name', 'enabled', 'category')
     list_filter = ('enabled', 'category')
     search_fields = ('name',)
 
 
-class AuditAdmin(admin.ModelAdmin):
+class AuditAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('representative', 'template', 'call_date', 'phone', 'department')
     list_filter = ('template',)
     search_fields = ('template__name', 'phone')
 
 
-class ResponseAdmin(admin.ModelAdmin):
+class ResponseAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('audit', 'question')
     search_fields = ('audit__name', 'question__name')
 
 
-class AttachmentAdmin(admin.ModelAdmin):
+class AttachmentAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('name', 'file_extension', 'audit')
     list_filter = ('file_extension',)
     search_fields = ('name', 'audit__name')

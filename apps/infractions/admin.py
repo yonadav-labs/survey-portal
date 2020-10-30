@@ -1,14 +1,15 @@
 from django.contrib import admin
+from import_export.admin import ImportExportMixin
 
 from .models import *
 
-class InfractionTypeAdmin(admin.ModelAdmin):
+class InfractionTypeAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('name', 'points', 'enabled')
     search_fields = ('name',)
     list_filter = ('enabled',)
 
 
-class InfractionAdmin(admin.ModelAdmin):
+class InfractionAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('representative', 'type', 'date')
     list_filter = ('type',)
 

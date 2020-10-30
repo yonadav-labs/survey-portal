@@ -2,3 +2,4 @@ django==3.1.2
 psycopg2
 django-allauth
 django-crispy-forms
+django-import-export
