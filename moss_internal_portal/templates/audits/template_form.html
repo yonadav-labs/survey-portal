@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb m-0">
+  <li class="breadcrumb-item"><a href="/infractions/">Infractions</a></li>
+  <li class="breadcrumb-item active">{% if entity.id %}Edit{% else %}Create{% endif %}</li>
+</ol>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        {% if entity.id %}
+            <h4 class="card-title my-1">Update Infraction</h4>
+        {% else %}
+            <h4 class="card-title my-1">Create New Infraction</h4>
+        {% endif %}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-7">
+                <form method="post">
+                    {% csrf_token %}
+                    {{form|crispy}}
+
+                    {% if entity.id %}
+                        <button type="submit" class="btn btn-success btn-sm">Update</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-success btn-sm">Create</button>
+                    {% endif %}
+
+                    <a href="{% url 'infractions:list' %}" class="btn btn-light btn-sm ml-1">Cancel</a>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

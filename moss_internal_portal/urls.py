@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include('apps.accounts.urls')),
     path('representatives/', include('apps.representatives.urls')),
     path('infractions/', include('apps.infractions.urls')),
+    path('audits/', include('apps.audits.urls')),
     path('superpanel/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
 ]
