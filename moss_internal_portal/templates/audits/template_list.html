@@ -2,7 +2,8 @@
 
 {% block breadcrumb %}
 <ol class="breadcrumb m-0">
-  <li class="breadcrumb-item"><a href="/infractions/">Infractions</a></li>
+  <li class="breadcrumb-item"><a href="/audits/">Audits</a></li>
+  <li class="breadcrumb-item"><a href="/audits/template">Templates</a></li>
   <li class="breadcrumb-item active">All</li>
 </ol>
 {% endblock %}
@@ -25,7 +26,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="text-lg-right">
-                            <a type="button" href="{% url 'infractions:create' %}" class="btn btn-primary mb-2 mr-2"><i class="mdi mdi-plus-circle mr-1"></i> Add New</a>
+                            <a type="button" href="{% url 'audits:template-create' %}" class="btn btn-primary mb-2 mr-2"><i class="mdi mdi-plus-circle mr-1"></i> Add New</a>
                         </div>
                     </div><!-- end col-->
                 </div>
@@ -57,15 +58,15 @@
                                         <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                     </div>
                                 </td>
-                                <!-- <td><a href="{% url 'infractions:detail' entity.id %}" class="text-body font-weight-bold">{{entity.id}}</a> </td> -->
+                                <!-- <td><a href="{% url 'audits:template-detail' entity.id %}" class="text-body font-weight-bold">{{entity.id}}</a> </td> -->
                                 <td>{{entity.representative}}</td>
                                 <td>{{entity.date}}</td>
                                 <td>{{entity.type}}</td>
                                 <td>{{entity.notes|truncatewords:5}}</td>
                                 <td>
-                                    <a href="{% url 'infractions:detail' entity.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="{% url 'infractions:update' entity.id %}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="{% url 'infractions:delete' entity.id %}" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                    <a href="{% url 'audits:detail' entity.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                    <a href="{% url 'audits:update' entity.id %}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="{% url 'audits:delete' entity.id %}" class="action-icon"> <i class="mdi mdi-delete"></i></a>
                                 </td>
                             </tr>
                             {% endfor %}

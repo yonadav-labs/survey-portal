@@ -22,7 +22,7 @@ class AnswerList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         keyword = self.request.GET.get('q', '')
-        enabled = self.request.GET.get('enabled', '')
+        enabled = self.request.GET.get('enabled') == 'true'
 
         q = Q(name__icontains=keyword)
 
@@ -107,11 +107,9 @@ class QuestionList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         keyword = self.request.GET.get('q', '')
-        enabled = self.request.GET.get('enabled', '')
+        enabled = self.request.GET.get('enabled') == 'true'
 
-        q = Q(name__icontains=keyword) \
-          | Q(last_name__icontains=keyword) \
-          | Q(email__icontains=keyword)
+        q = Q(name__icontains=keyword)
 
         if enabled:
             q &= Q(enabled=enabled)
@@ -194,11 +192,9 @@ class TemplateList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         keyword = self.request.GET.get('q', '')
-        enabled = self.request.GET.get('enabled', '')
+        enabled = self.request.GET.get('enabled') == 'true'
 
-        q = Q(name__icontains=keyword) \
-          | Q(last_name__icontains=keyword) \
-          | Q(email__icontains=keyword)
+        q = Q(name__icontains=keyword)
 
         if enabled:
             q &= Q(enabled=enabled)
@@ -281,16 +277,12 @@ class AuditList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         keyword = self.request.GET.get('q', '')
-        enabled = self.request.GET.get('enabled', '')
 
-        q = Q(name__icontains=keyword) \
-          | Q(last_name__icontains=keyword) \
-          | Q(email__icontains=keyword)
+        q = Q(representative__first_name__icontains=keyword) \
+          | Q(representative__last_name__icontains=keyword) \
+          | Q(representative__email__icontains=keyword)
 
-        if enabled:
-            q &= Q(enabled=enabled)
-
-        return Audit.objects.filter(q).order_by('name')
+        return Audit.objects.filter(q).order_by('representative__first_name')
 
     def get_context_data(self, **kwargs):
         context = super(AuditList, self).get_context_data(**kwargs)

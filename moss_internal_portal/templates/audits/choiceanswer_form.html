@@ -3,7 +3,8 @@
 
 {% block breadcrumb %}
 <ol class="breadcrumb m-0">
-  <li class="breadcrumb-item"><a href="/infractions/">Infractions</a></li>
+  <li class="breadcrumb-item"><a href="/audits/">Audits</a></li>
+  <li class="breadcrumb-item"><a href="/audits/answer">Answers</a></li>
   <li class="breadcrumb-item active">{% if entity.id %}Edit{% else %}Create{% endif %}</li>
 </ol>
 {% endblock %}
@@ -32,7 +33,7 @@
                         <button type="submit" class="btn btn-success btn-sm">Create</button>
                     {% endif %}
 
-                    <a href="{% url 'infractions:list' %}" class="btn btn-light btn-sm ml-1">Cancel</a>
+                    <a href="{% url 'audits:answer-list' %}" class="btn btn-light btn-sm ml-1">Cancel</a>
                 </form>
                 
             </div>
