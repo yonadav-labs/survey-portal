@@ -12,26 +12,26 @@
 
 <div class="card">
     <div class="card-header">
-      <h4 class="card-title my-1">Infraction Details ({{entity}})</h4>
+      <h4 class="card-title my-1">Audit Details ({{entity}})</h4>
     </div>
     <div class="card-body">
       <dl class="row">
         <dt class="col-sm-3 col-lg-2 mb-2">Representative</dt>
         <dd class="col-sm-9">{{ entity.representative }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Date</dt>
-        <dd class="col-sm-9">{{ entity.date }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Type</dt>
-        <dd class="col-sm-9">{{ entity.type }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Points</dt>
-        <dd class="col-sm-9">{{ entity.type.points }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">WFH Days Forfeit</dt>
-        <dd class="col-sm-9">{{ entity.type.wfh_days_forfeit }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Rolling Months</dt>
-        <dd class="col-sm-9">{{ entity.type.rolling_months }}</dd>
+        <dt class="col-sm-3 col-lg-2 mb-2">Template</dt>
+        <dd class="col-sm-9">{{ entity.template }}</dd>
+        <dt class="col-sm-3 col-lg-2 mb-2">Call Date</dt>
+        <dd class="col-sm-9">{{ entity.call_date }}</dd>
+        <dt class="col-sm-3 col-lg-2 mb-2">Phone</dt>
+        <dd class="col-sm-9">{{ entity.phone }}</dd>
+        <dt class="col-sm-3 col-lg-2 mb-2">Department</dt>
+        <dd class="col-sm-9">{{ entity.department }}</dd>
+        <dt class="col-sm-3 col-lg-2 mb-2">Questions</dt>
+        <dd class="col-sm-9">{{ entity.template.questions.all|join:", " }}</dd>
         <dt class="col-sm-3 col-lg-2 mb-2">Notes</dt>
         <dd class="col-sm-9">{{ entity.notes }}</dd>
       </dl>
-      <a href="{% url 'infractions:list' %}" class="btn btn-secondary btn-sm">Back</a>
+      <a href="{% url 'audits:list' %}" class="btn btn-secondary btn-sm">Back</a>
     </div>
 </div>
 

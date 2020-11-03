@@ -49,7 +49,7 @@ class Audit(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
     notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return str(self.representative)
+        return f"{str(self.representative)} - {str(self.template)}"
 
 
 class Response(UUIDPrimaryKeyMixin, CreatedModifiedMixin):

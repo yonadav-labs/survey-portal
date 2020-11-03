@@ -4,14 +4,14 @@ from apps.representatives.models import *
 from .models import *
 
 
-# class InfractionForm(forms.ModelForm):
+class AuditForm(forms.ModelForm):
 
-#     def __init__(self, *args, **kwargs):
-#         super(InfractionForm, self).__init__(*args, **kwargs)
-#         self.fields['date'].widget.attrs = { 'class': 'date', 'data-toggle': 'date-picker', 'data-single-date-picker': 'true' }
-#         self.fields['representative'].queryset = Representative.objects.filter(status="ACTIVE")
-#         self.fields['type'].queryset = InfractionType.objects.filter(enabled=True)
+    def __init__(self, *args, **kwargs):
+        super(AuditForm, self).__init__(*args, **kwargs)
+        self.fields['call_date'].widget.attrs = { 'class': 'date', 'data-toggle': 'date-picker', 'data-single-date-picker': 'true' }
+        self.fields['representative'].queryset = Representative.objects.filter(status="ACTIVE")
+        self.fields['template'].queryset = Template.objects.filter(enabled=True)
 
-#     class Meta:
-#         model = Infraction
-#         fields = '__all__'
+    class Meta:
+        model = Audit
+        fields = '__all__'

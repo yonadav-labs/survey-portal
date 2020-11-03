@@ -12,7 +12,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h4 class="card-title my-1">Delete Infraction ({{object}})</h4>
+        <h4 class="card-title my-1">Delete Audit ({{object}})</h4>
     </div>
     <div class="card-body">
         <form method="post">
@@ -21,7 +21,7 @@
                 Are you sure you want to delete <strong>{{ object }}</strong> ?
             </div>
             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            <a href="{% url 'infractions:list' %}" class="btn btn-light btn-sm ml-1">Cancel</a>
+            <a href="{% url 'audits:list' %}" class="btn btn-light btn-sm ml-1">Cancel</a>
         </form>
     </div>
 </div>

@@ -343,7 +343,7 @@ class AuditCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('audits:list')
     success_message = 'Audit created successfully.'
     login_url = '/login'
-    # form_class = AuditForm
+    form_class = AuditForm
 
     @method_decorator(permission_required('audits.add_audit', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
@@ -356,7 +356,7 @@ class AuditUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('audits:list')
     success_message = 'Audit updated successfully.'
     login_url = '/login'
-    # form_class = AuditForm
+    form_class = AuditForm
 
     @method_decorator(permission_required('audits.change_audit', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):

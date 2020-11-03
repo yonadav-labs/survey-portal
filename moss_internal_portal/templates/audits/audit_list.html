@@ -42,8 +42,10 @@
                                 </th>
                                 <!-- <th scope="col">ID</th> -->
                                 <th scope="col">Representative</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Type</th>
+                                <th scope="col">Template</th>
+                                <th scope="col">Call Date</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Department</th>
                                 <th scope="col">Notes</th>
                                 <th style="width: 125px;">Action</th>
                             </tr>
@@ -59,8 +61,10 @@
                                 </td>
                                 <!-- <td><a href="{% url 'audits:detail' entity.id %}" class="text-body font-weight-bold">{{entity.id}}</a> </td> -->
                                 <td>{{entity.representative}}</td>
-                                <td>{{entity.date}}</td>
-                                <td>{{entity.type}}</td>
+                                <td>{{entity.template}}</td>
+                                <td>{{entity.call_date}}</td>
+                                <td>{{entity.phone}}</td>
+                                <td>{{entity.department}}</td>
                                 <td>{{entity.notes|truncatewords:5}}</td>
                                 <td>
                                     <a href="{% url 'audits:detail' entity.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
