@@ -64,7 +64,6 @@ class AnswerCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('audits:answer-list')
     success_message = 'Answer created successfully.'
     login_url = '/login'
-    # form_class = AnswerForm
     fields = '__all__'
 
     @method_decorator(permission_required('audits.add_choiceanswer', raise_exception=True))
@@ -78,7 +77,6 @@ class AnswerUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('audits:answer-list')
     success_message = 'Answer updated successfully.'
     login_url = '/login'
-    # form_class = AnswerForm
     fields = '__all__'
 
     @method_decorator(permission_required('audits.change_choiceanswer', raise_exception=True))
@@ -149,10 +147,10 @@ class QuestionDetail(LoginRequiredMixin, DetailView):
 
 class QuestionCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Question
-    success_url = reverse_lazy('audits:list')
+    success_url = reverse_lazy('audits:question-list')
     success_message = 'Question created successfully.'
     login_url = '/login'
-    # form_class = QuestionForm
+    fields = '__all__'
 
     @method_decorator(permission_required('audits.add_question', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
@@ -162,10 +160,10 @@ class QuestionCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class QuestionUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Question
     context_object_name = 'entity'
-    success_url = reverse_lazy('audits:list')
+    success_url = reverse_lazy('audits:question-list')
     success_message = 'Question updated successfully.'
     login_url = '/login'
-    # form_class = QuestionForm
+    fields = '__all__'
 
     @method_decorator(permission_required('audits.change_question', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
@@ -174,7 +172,7 @@ class QuestionUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class QuestionDelete(LoginRequiredMixin, DeleteView):
     model = Question
-    success_url = reverse_lazy('audits:list')
+    success_url = reverse_lazy('audits:question-list')
     success_message = 'Question deleted successfully.'
     login_url = '/login'
 
