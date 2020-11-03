@@ -233,10 +233,10 @@ class TemplateDetail(LoginRequiredMixin, DetailView):
 
 class TemplateCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Template
-    success_url = reverse_lazy('audits:list')
+    success_url = reverse_lazy('audits:template-list')
     success_message = 'Template created successfully.'
     login_url = '/login'
-    # form_class = TemplateForm
+    fields = '__all__'
 
     @method_decorator(permission_required('audits.add_template', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
@@ -246,10 +246,10 @@ class TemplateCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class TemplateUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Template
     context_object_name = 'entity'
-    success_url = reverse_lazy('audits:list')
+    success_url = reverse_lazy('audits:template-list')
     success_message = 'Template updated successfully.'
     login_url = '/login'
-    # form_class = TemplateForm
+    fields = '__all__'
 
     @method_decorator(permission_required('audits.change_template', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
@@ -258,7 +258,7 @@ class TemplateUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class TemplateDelete(LoginRequiredMixin, DeleteView):
     model = Template
-    success_url = reverse_lazy('audits:list')
+    success_url = reverse_lazy('audits:template-list')
     success_message = 'Template deleted successfully.'
     login_url = '/login'
 
