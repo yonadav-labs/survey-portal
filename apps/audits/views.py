@@ -23,11 +23,12 @@ class AnswerList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         keyword = self.request.GET.get('q', '')
-        enabled = self.request.GET.get('enabled') == 'true'
+        enabled = self.request.GET.get('enabled')
 
         q = Q(name__icontains=keyword)
 
         if enabled:
+            enabled = enabled == 'true'
             q &= Q(enabled=enabled)
 
         return ChoiceAnswer.objects.filter(q).order_by('name')
@@ -109,11 +110,12 @@ class QuestionList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         keyword = self.request.GET.get('q', '')
-        enabled = self.request.GET.get('enabled') == 'true'
+        enabled = self.request.GET.get('enabled')
 
         q = Q(name__icontains=keyword)
 
         if enabled:
+            enabled = enabled == 'true'
             q &= Q(enabled=enabled)
 
         return Question.objects.filter(q).order_by('name')
@@ -195,11 +197,12 @@ class TemplateList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         keyword = self.request.GET.get('q', '')
-        enabled = self.request.GET.get('enabled') == 'true'
+        enabled = self.request.GET.get('enabled')
 
         q = Q(name__icontains=keyword)
 
         if enabled:
+            enabled = enabled == 'true'
             q &= Q(enabled=enabled)
 
         return Template.objects.filter(q).order_by('name')
