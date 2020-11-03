@@ -3,7 +3,7 @@
 {% block breadcrumb %}
 <ol class="breadcrumb m-0">
   <li class="breadcrumb-item"><a href="/audits/">Audits</a></li>
-  <li class="breadcrumb-item"><a href="/audits/answer">Answers</a></li>
+  <li class="breadcrumb-item"><a href="/audits/answer">Template Answers</a></li>
   <li class="breadcrumb-item active">All</li>
 </ol>
 {% endblock %}
@@ -42,10 +42,9 @@
                                     </div>
                                 </th>
                                 <!-- <th scope="col">ID</th> -->
-                                <th scope="col">Representative</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Notes</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Enabled</th>
                                 <th style="width: 125px;">Action</th>
                             </tr>
                         </thead>
@@ -59,10 +58,9 @@
                                     </div>
                                 </td>
                                 <!-- <td><a href="{% url 'audits:answer-detail' entity.id %}" class="text-body font-weight-bold">{{entity.id}}</a> </td> -->
-                                <td>{{entity.representative}}</td>
-                                <td>{{entity.date}}</td>
-                                <td>{{entity.type}}</td>
-                                <td>{{entity.notes|truncatewords:5}}</td>
+                                <td>{{entity.name}}</td>
+                                <td>{{entity.category|default:"-"}}</td>
+                                <td>{{entity.enabled|yesno|title}}</td>
                                 <td>
                                     <a href="{% url 'audits:answer-detail' entity.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
                                     <a href="{% url 'audits:answer-update' entity.id %}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>

@@ -14,6 +14,7 @@ from .forms import *
 
 
 ### ChoiceAnswer Viewsets ###
+
 class AnswerList(LoginRequiredMixin, ListView):
     model = ChoiceAnswer
     login_url = '/login'
@@ -60,10 +61,11 @@ class AnswerDetail(LoginRequiredMixin, DetailView):
 
 class AnswerCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = ChoiceAnswer
-    success_url = reverse_lazy('audits:list')
+    success_url = reverse_lazy('audits:answer-list')
     success_message = 'Answer created successfully.'
     login_url = '/login'
     # form_class = AnswerForm
+    fields = '__all__'
 
     @method_decorator(permission_required('audits.add_choiceanswer', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
@@ -73,10 +75,11 @@ class AnswerCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class AnswerUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = ChoiceAnswer
     context_object_name = 'entity'
-    success_url = reverse_lazy('audits:list')
+    success_url = reverse_lazy('audits:answer-list')
     success_message = 'Answer updated successfully.'
     login_url = '/login'
     # form_class = AnswerForm
+    fields = '__all__'
 
     @method_decorator(permission_required('audits.change_choiceanswer', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
@@ -85,7 +88,7 @@ class AnswerUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class AnswerDelete(LoginRequiredMixin, DeleteView):
     model = ChoiceAnswer
-    success_url = reverse_lazy('audits:list')
+    success_url = reverse_lazy('audits:answer-list')
     success_message = 'Answer deleted successfully.'
     login_url = '/login'
 
@@ -99,6 +102,7 @@ class AnswerDelete(LoginRequiredMixin, DeleteView):
 
 
 ### Question Viewsets ###
+
 class QuestionList(LoginRequiredMixin, ListView):
     model = Question
     login_url = '/login'
@@ -184,6 +188,7 @@ class QuestionDelete(LoginRequiredMixin, DeleteView):
 
 
 ### TemplateList Viewsets ###
+
 class TemplateList(LoginRequiredMixin, ListView):
     model = Template
     login_url = '/login'
@@ -269,6 +274,7 @@ class TemplateDelete(LoginRequiredMixin, DeleteView):
 
 
 ### AuditList Viewsets ###
+
 class AuditList(LoginRequiredMixin, ListView):
     model = Audit
     login_url = '/login'
