@@ -154,6 +154,11 @@ class QuestionCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     login_url = '/login'
     fields = '__all__'
 
+    def get_form(self, *args, **kwargs):
+        form = super(QuestionCreate, self).get_form(*args, **kwargs)
+        form.fields['answers'].queryset = ChoiceAnswer.objects.filter(enabled=True)
+        return form
+
     @method_decorator(permission_required('audits.add_question', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(QuestionCreate, self).dispatch(request)
@@ -166,6 +171,11 @@ class QuestionUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = 'Question updated successfully.'
     login_url = '/login'
     fields = '__all__'
+
+    def get_form(self, *args, **kwargs):
+        form = super(QuestionUpdate, self).get_form(*args, **kwargs)
+        form.fields['answers'].queryset = ChoiceAnswer.objects.filter(enabled=True)
+        return form
 
     @method_decorator(permission_required('audits.change_question', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
@@ -241,6 +251,11 @@ class TemplateCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     login_url = '/login'
     fields = '__all__'
 
+    def get_form(self, *args, **kwargs):
+        form = super(TemplateCreate, self).get_form(*args, **kwargs)
+        form.fields['questions'].queryset = Question.objects.filter(enabled=True)
+        return form
+
     @method_decorator(permission_required('audits.add_template', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(TemplateCreate, self).dispatch(request)
@@ -253,6 +268,11 @@ class TemplateUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = 'Template updated successfully.'
     login_url = '/login'
     fields = '__all__'
+
+    def get_form(self, *args, **kwargs):
+        form = super(TemplateUpdate, self).get_form(*args, **kwargs)
+        form.fields['questions'].queryset = Question.objects.filter(enabled=True)
+        return form
 
     @method_decorator(permission_required('audits.change_template', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
