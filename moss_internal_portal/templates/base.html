@@ -24,7 +24,7 @@
 
   </head>
 
-  <body class="loading" data-layout-config='{"leftSideBarTheme":"default","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+  <body class="loading" data-layout-config='{"leftSideBarTheme":"default","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false}'>
     <!-- Begin page -->
     <div class="wrapper">
       <!-- ========== Left Sidebar Start ========== -->
@@ -176,6 +176,9 @@
 
             <div class="page-title-box">
               {% block breadcrumb %}
+                <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item active">Home</li>
+                </ol>
               {% endblock %}
             </div>
           </div>
