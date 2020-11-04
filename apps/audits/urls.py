@@ -10,6 +10,7 @@ urlpatterns = [
     path('<uuid:pk>', views.AuditDetail.as_view(), name='detail'),
     path('<uuid:pk>/update', views.AuditUpdate.as_view(), name='update'),
     path('<uuid:pk>/delete/', views.AuditDelete.as_view(), name='delete'),
+    path('<uuid:pk>/fill/', views.AuditFill.as_view(), name='fill'),
     path('answer', views.AnswerList.as_view(), name='answer-list'),
     path('answer/create', views.AnswerCreate.as_view(), name='answer-create'),
     path('answer/<uuid:pk>', views.AnswerDetail.as_view(), name='answer-detail'),

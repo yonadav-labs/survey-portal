@@ -61,7 +61,7 @@ class Response(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
     yesno_answer = models.BooleanField(blank=True, null=True)
 
     def __str__(self):
-        return self.audit.name
+        return str(self.audit)
 
 
 class Attachment(UUIDPrimaryKeyMixin, CreatedModifiedMixin):

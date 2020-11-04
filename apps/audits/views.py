@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.views import View
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
@@ -8,6 +9,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import *
 from .forms import *
@@ -376,3 +378,36 @@ class AuditDelete(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super(AuditDelete, self).delete(request, *args, **kwargs)
+
+
+class AuditFill(View):
+
+    def get(self, request, *args, **kwargs):
+        audit_id = kwargs.get('pk')
+        audit = get_object_or_404(Audit, pk=audit_id)
+
+        return render(request, 'audits/audit_fill.html', locals())
+
+    def post(self, request, *args, **kwargs):
+        audit_id = kwargs.get('pk')
+        audit = get_object_or_404(Audit, pk=audit_id)
+        error_msg = []
+
+        for question in audit.template.questions.all():
+            res = request.POST.get(str(question.id)) or None
+
+            if question.type == 'CHOICE':
+                Response.objects.update_or_create(audit=audit, question=question, defaults={'choice_answer_id': res})
+            elif question.type == 'TEXT':
+                Response.objects.update_or_create(audit=audit, question=question, defaults={'text_answer': res})
+            elif question.type == 'NUMBER':
+                Response.objects.update_or_create(audit=audit, question=question, defaults={'number_answer': res})
+            elif question.type == 'YESNO':
+                res = res == 'true' if res else None
+                Response.objects.update_or_create(audit=audit, question=question, defaults={'yesno_answer': res})
+
+        if not error_msg:
+            messages.success(self.request, "The audit answers saved successfully.")
+            return redirect(reverse_lazy('audits:list'))
+
+        return render(request, 'audits/audit_fill.html', locals())

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load audit_extras %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb m-0">
+  <li class="breadcrumb-item"><a href="/audits/">Audits</a></li>
+  <li class="breadcrumb-item active">Fill</li>
+</ol>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title my-1">Fill Audit</h4>
+    </div>
+    <div class="card-body pt-0">
+        <div class="row">
+            <div class="col-md-7">
+                <form method="post">
+                    {% csrf_token %}
+                    {% for msg in error_msg %}
+                        <div class="text-danger">{{msg}}</div>
+                    {% endfor %}
+
+                    {% for question in audit.template.questions.all %}
+                        <label class="mt-3 text-primary">{{question.name}}</label>
+                        {% if question.type == 'CHOICE' %}
+                            <select name="{{question.id}}" class="form-control">
+                                <option value="">Choose ...</option>
+                                {% for answer in question.answers.all %}
+                                    <option value="{{answer.id}}" {{question|answer:audit|selected:answer}}>{{answer.name}}</option>
+                                {% endfor %}
+                            </select>
+                        {% elif question.type == 'NUMBER' %}
+                            <input type="number" name="{{question.id}}" class="form-control" value="{{question|answer:audit}}">
+                        {% elif question.type == 'TEXT' %}
+                            <input type="text" name="{{question.id}}" class="form-control" value="{{question|answer:audit}}">
+                        {% else %}
+                            <div class="clearfix"></div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadio3" {{question|checked_yes:audit}} name="{{question.id}}" class="custom-control-input" value="true">
+                                <label class="custom-control-label" for="customRadio3">Yes</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadio4" {{question|checked_no:audit}} name="{{question.id}}" class="custom-control-input" value="false">
+                                <label class="custom-control-label" for="customRadio4">No</label>
+                            </div>
+                            <div class="clearfix"></div>
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                        <a href="{% url 'audits:list' %}" class="btn btn-light btn-sm ml-1">Cancel</a>                        
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

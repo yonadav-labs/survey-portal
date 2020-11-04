@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load audit_extras %}
 
 {% block breadcrumb %}
 <ol class="breadcrumb m-0">
@@ -30,6 +31,15 @@
         <dd class="col-sm-9">{{ entity.template.questions.all|join:", " }}</dd>
         <dt class="col-sm-3 col-lg-2 mb-2">Notes</dt>
         <dd class="col-sm-9">{{ entity.notes }}</dd>
+      </dl>
+      <h4 class="text-primary mb-3">Audit Answers</h4>
+      <dl class="row">
+        {% for question in entity.template.questions.all %}
+          <dt class="col-sm-3 col-lg-2 mb-2">{{question.name}}</dt>
+          <dd class="col-sm-9">
+            {{question|answer:entity}}
+          </dd>
+        {% endfor %}
       </dl>
       <a href="{% url 'audits:list' %}" class="btn btn-secondary btn-sm">Back</a>
     </div>

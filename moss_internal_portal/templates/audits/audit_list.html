@@ -47,7 +47,7 @@
                                 <th scope="col">Phone</th>
                                 <th scope="col">Department</th>
                                 <th scope="col">Notes</th>
-                                <th style="width: 125px;">Action</th>
+                                <th style="width: 150px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,9 +64,10 @@
                                 <td>{{entity.template}}</td>
                                 <td>{{entity.call_date}}</td>
                                 <td>{{entity.phone}}</td>
-                                <td>{{entity.department}}</td>
+                                <td>{{entity.department|default:'-'}}</td>
                                 <td>{{entity.notes|truncatewords:5}}</td>
                                 <td>
+                                    <a href="{% url 'audits:fill' entity.id %}" class="action-icon"> <i class="uil-file-edit-alt"></i></a>
                                     <a href="{% url 'audits:detail' entity.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
                                     <a href="{% url 'audits:update' entity.id %}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
                                     <a href="{% url 'audits:delete' entity.id %}" class="action-icon"> <i class="mdi mdi-delete"></i></a>
