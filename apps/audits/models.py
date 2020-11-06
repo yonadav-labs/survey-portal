@@ -10,7 +10,7 @@ class ChoiceAnswer(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
     enabled = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.category} - {self.name}' if self.category else self.name
 
 
 class Question(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
@@ -27,7 +27,7 @@ class Question(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
     enabled = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.category} - {self.name}' if self.category else self.name
 
 
 class Template(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
@@ -37,7 +37,7 @@ class Template(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
     enabled = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.category} - {self.name}' if self.category else self.name
 
 
 class Audit(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
@@ -67,7 +67,7 @@ class Response(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
 class Attachment(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
     name = models.CharField(max_length=150)
     description = models.TextField(blank=True, null=True)
-    file_extension = models.CharField(max_length=10)
+    file_extension = models.CharField(max_length=10, blank=True, null=True)
     audit = models.ForeignKey(Audit, on_delete=models.CASCADE, related_name='attachments')
     file = models.FileField()
 

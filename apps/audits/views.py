@@ -351,6 +351,26 @@ class AuditCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     def dispatch(self, request, *args, **kwargs):
         return super(AuditCreate, self).dispatch(request)
 
+    def form_valid(self, form):
+        self.object = form.save()
+        meta_new_desc = self.request.POST.get('meta_new_desc', '').split('@$@')
+
+        # add new files
+        idx = 0
+        for file in self.request.FILES.getlist('attachment-file'):
+            name_parts = file.name.split('.')
+            extension = name_parts[-1] if len(name_parts) > 1 else None
+            description = meta_new_desc[idx]
+            idx += 1
+            self.object.attachments.create(
+                file=file,
+                name=file.name,
+                file_extension=extension,
+                description=description
+            )
+
+        return super().form_valid(form)
+
 
 class AuditUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Audit
@@ -360,9 +380,48 @@ class AuditUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = '/login'
     form_class = AuditForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['meta_old_files'] = '@$@'.join([ii.name for ii in self.object.attachments.all()])
+        context['meta_old_desc'] = '@$@'.join([ii.description or '' for ii in self.object.attachments.all()])
+
+        return context
+
     @method_decorator(permission_required('audits.change_audit', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(AuditUpdate, self).dispatch(request)
+
+    def form_valid(self, form):
+        self.object = form.save()
+        meta_old_files = self.request.POST.get('meta_old_files').split('@$@')
+        meta_old_desc = self.request.POST.get('meta_old_desc').split('@$@')
+        meta_new_desc = self.request.POST.get('meta_new_desc', '').split('@$@')
+
+        # sync old files
+        for file in self.object.attachments.all():
+            if file.name not in meta_old_files:
+                file.delete()
+            else:
+                idx = meta_old_files.index(file.name)
+                if meta_old_desc[idx] != file.description:
+                    file.description = meta_old_desc[idx]
+                    file.save()
+
+        # add new files
+        idx = 0
+        for file in self.request.FILES.getlist('attachment-file'):
+            name_parts = file.name.split('.')
+            extension = name_parts[-1] if len(name_parts) > 1 else None
+            description = meta_new_desc[idx]
+            idx += 1
+            self.object.attachments.create(
+                file=file,
+                name=file.name,
+                file_extension=extension,
+                description=description
+            )
+
+        return super().form_valid(form)
 
 
 class AuditDelete(LoginRequiredMixin, DeleteView):
