@@ -10,6 +10,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404, redirect
+from django.forms.models import model_to_dict
 
 from .models import *
 from .forms import *
@@ -100,6 +101,20 @@ class AnswerDelete(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super(AnswerDelete, self).delete(request, *args, **kwargs)
+
+
+class AnswerClone(View):
+    form_class = AnswerForm
+    template_name = 'audits/choiceanswer_form.html'
+
+    def get(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
+        entity = get_object_or_404(self.form_class.Meta.model, pk=pk)
+        entity.id = None
+        entity.name = entity.name + '_copy'
+        form = self.form_class(initial=model_to_dict(entity))
+
+        return render(request, self.template_name, locals())
 
 
 ### Question Viewsets ###
@@ -199,6 +214,20 @@ class QuestionDelete(LoginRequiredMixin, DeleteView):
         return super(QuestionDelete, self).delete(request, *args, **kwargs)
 
 
+class QuestionClone(View):
+    form_class = QuestionForm
+    template_name = 'audits/question_form.html'
+
+    def get(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
+        entity = get_object_or_404(self.form_class.Meta.model, pk=pk)
+        entity.id = None
+        entity.name = entity.name + '_copy'
+        form = self.form_class(initial=model_to_dict(entity))
+
+        return render(request, self.template_name, locals())
+
+
 ### TemplateList Viewsets ###
 
 class TemplateList(LoginRequiredMixin, ListView):
@@ -294,6 +323,20 @@ class TemplateDelete(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super(TemplateDelete, self).delete(request, *args, **kwargs)
+
+
+class TemplateClone(View):
+    form_class = TemplateForm
+    template_name = 'audits/template_form.html'
+
+    def get(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
+        entity = get_object_or_404(self.form_class.Meta.model, pk=pk)
+        entity.id = None
+        entity.name = entity.name + '_copy'
+        form = self.form_class(initial=model_to_dict(entity))
+
+        return render(request, self.template_name, locals())
 
 
 ### AuditList Viewsets ###
@@ -470,3 +513,18 @@ class AuditFill(View):
             return redirect(reverse_lazy('audits:list'))
 
         return render(request, 'audits/audit_fill.html', locals())
+
+
+class AuditClone(View):
+    form_class = AuditForm
+    template_name = 'audits/audit_form.html'
+
+    def get(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
+        entity = get_object_or_404(self.form_class.Meta.model, pk=pk)
+        entity.id = None
+        entity.call_date = None
+        entity.notes = None
+        form = self.form_class(initial=model_to_dict(entity))
+
+        return render(request, self.template_name, locals())

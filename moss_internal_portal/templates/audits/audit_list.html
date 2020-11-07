@@ -47,7 +47,7 @@
                                 <th scope="col">Phone</th>
                                 <th scope="col">Department</th>
                                 <th scope="col">Notes</th>
-                                <th style="width: 150px;">Action</th>
+                                <th style="width: 175px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,10 +67,11 @@
                                 <td>{{entity.department|default:'-'}}</td>
                                 <td>{{entity.notes|truncatewords:5}}</td>
                                 <td>
-                                    <a href="{% url 'audits:fill' entity.id %}" class="action-icon"> <i class="uil-file-edit-alt"></i></a>
-                                    <a href="{% url 'audits:detail' entity.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="{% url 'audits:update' entity.id %}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="{% url 'audits:delete' entity.id %}" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                    <a href="{% url 'audits:clone' entity.id %}" class="action-icon" title="Clone"> <i class="uil uil-copy"></i></a>
+                                    <a href="{% url 'audits:fill' entity.id %}" class="action-icon" title="Fill Response"> <i class="uil-file-edit-alt"></i></a>
+                                    <a href="{% url 'audits:detail' entity.id %}" class="action-icon" title="View"> <i class="mdi mdi-eye"></i></a>
+                                    <a href="{% url 'audits:update' entity.id %}" class="action-icon" title="Edit"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="{% url 'audits:delete' entity.id %}" class="action-icon" title="Delete"> <i class="mdi mdi-delete"></i></a>
                                 </td>
                             </tr>
                             {% endfor %}

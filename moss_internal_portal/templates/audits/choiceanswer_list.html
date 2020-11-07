@@ -53,7 +53,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Category</th>
                                 <th scope="col">Enabled</th>
-                                <th style="width: 125px;">Action</th>
+                                <th style="width: 150px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,10 +69,11 @@
                                 <td>{{entity.name}}</td>
                                 <td>{{entity.category|default:"-"}}</td>
                                 <td>{{entity.enabled|yesno|title}}</td>
-                                <td>
-                                    <a href="{% url 'audits:answer-detail' entity.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="{% url 'audits:answer-update' entity.id %}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="{% url 'audits:answer-delete' entity.id %}" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                <td>                                    
+                                    <a href="{% url 'audits:answer-clone' entity.id %}" class="action-icon" title="Clone"> <i class="uil uil-copy"></i></a>
+                                    <a href="{% url 'audits:answer-detail' entity.id %}" class="action-icon" title="View"> <i class="mdi mdi-eye"></i></a>
+                                    <a href="{% url 'audits:answer-update' entity.id %}" class="action-icon" title="Edit"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="{% url 'audits:answer-delete' entity.id %}" class="action-icon" title="Delete"> <i class="mdi mdi-delete"></i></a>
                                 </td>
                             </tr>
                             {% endfor %}

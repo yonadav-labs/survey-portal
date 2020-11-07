@@ -54,7 +54,7 @@
                                 <th scope="col">Category</th>
                                 <th scope="col">Type</th>
                                 <th scope="col">Enabled</th>
-                                <th style="width: 125px;">Action</th>
+                                <th style="width: 150px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,9 +72,10 @@
                                 <td>{{entity.type}}</td>
                                 <td>{{entity.enabled|yesno|title}}</td>
                                 <td>
-                                    <a href="{% url 'audits:question-detail' entity.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="{% url 'audits:question-update' entity.id %}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="{% url 'audits:question-delete' entity.id %}" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                    <a href="{% url 'audits:question-clone' entity.id %}" class="action-icon" title="Clone"> <i class="uil uil-copy"></i></a>
+                                    <a href="{% url 'audits:question-detail' entity.id %}" class="action-icon" title="View"> <i class="mdi mdi-eye"></i></a>
+                                    <a href="{% url 'audits:question-update' entity.id %}" class="action-icon" title="Edit"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="{% url 'audits:question-delete' entity.id %}" class="action-icon" title="Delete"> <i class="mdi mdi-delete"></i></a>
                                 </td>
                             </tr>
                             {% endfor %}

@@ -23,7 +23,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-7">
-                <form method="post">
+                <form method="post" action="{% if entity.id %}{% url 'audits:answer-update' entity.id %}{% else %}{% url 'audits:answer-create' %}{% endif %}">
                     {% csrf_token %}
                     {{form|crispy}}
 

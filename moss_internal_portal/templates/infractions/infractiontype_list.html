@@ -72,7 +72,7 @@
                                 <td>{{entity.points}}</td>
                                 <td>{{entity.wfh_days_forfeit}}</td>
                                 <td>{{entity.rolling_months}}</td>
-                                <td><span class="badge {% if entity.enabled %}badge-success-lighten{% else %}badge-danger-lighten{% endif %}">{{entity.enabled|yesno}}</span></td>
+                                <td><span class="badge {% if entity.enabled %}badge-success-lighten{% else %}badge-danger-lighten{% endif %}">{{entity.enabled|yesno|title}}</span></td>
                                 <td>
                                     <a href="{% url 'infractions:type-detail' entity.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
                                     <a href="{% url 'infractions:type-update' entity.id %}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>

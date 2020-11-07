@@ -15,3 +15,21 @@ class AuditForm(forms.ModelForm):
     class Meta:
         model = Audit
         fields = '__all__'
+
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = ChoiceAnswer
+        fields = '__all__'
+
+
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = '__all__'
+
+
+class TemplateForm(forms.ModelForm):
+    class Meta:
+        model = Template
+        fields = '__all__'
