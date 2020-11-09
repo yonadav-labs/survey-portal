@@ -41,12 +41,12 @@
                         {% else %}
                             <div class="clearfix"></div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadio3" {{question|checked_yes:audit}} name="{{question.id}}" class="custom-control-input" value="true">
-                                <label class="custom-control-label" for="customRadio3">Yes</label>
+                                <input type="radio" id="{{question.id}}-yes" {{question|checked_yes:audit}} name="{{question.id}}" class="custom-control-input" value="true">
+                                <label class="custom-control-label" for="{{question.id}}-yes">Yes</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadio4" {{question|checked_no:audit}} name="{{question.id}}" class="custom-control-input" value="false">
-                                <label class="custom-control-label" for="customRadio4">No</label>
+                                <input type="radio" id="{{question.id}}-no" {{question|checked_no:audit}} name="{{question.id}}" class="custom-control-input" value="false">
+                                <label class="custom-control-label" for="{{question.id}}-no">No</label>
                             </div>
                             <div class="clearfix"></div>
                         {% endif %}
