@@ -277,15 +277,10 @@ class TemplateDetail(LoginRequiredMixin, DetailView):
 
 class TemplateCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Template
+    form_class = TemplateForm
     success_url = reverse_lazy('audits:template-list')
     success_message = 'Template created successfully.'
     login_url = '/login'
-    fields = '__all__'
-
-    def get_form(self, *args, **kwargs):
-        form = super(TemplateCreate, self).get_form(*args, **kwargs)
-        form.fields['questions'].queryset = Question.objects.filter(enabled=True)
-        return form
 
     @method_decorator(permission_required('audits.add_template', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
@@ -294,16 +289,11 @@ class TemplateCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 class TemplateUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Template
+    form_class = TemplateForm
     context_object_name = 'entity'
     success_url = reverse_lazy('audits:template-list')
     success_message = 'Template updated successfully.'
     login_url = '/login'
-    fields = '__all__'
-
-    def get_form(self, *args, **kwargs):
-        form = super(TemplateUpdate, self).get_form(*args, **kwargs)
-        form.fields['questions'].queryset = Question.objects.filter(enabled=True)
-        return form
 
     @method_decorator(permission_required('audits.change_template', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):

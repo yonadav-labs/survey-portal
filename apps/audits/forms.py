@@ -1,4 +1,6 @@
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Field, Div, Fieldset
 
 from apps.representatives.models import *
 from .models import *
@@ -30,6 +32,17 @@ class QuestionForm(forms.ModelForm):
 
 
 class TemplateForm(forms.ModelForm):
+    questions = forms.ModelMultipleChoiceField(
+        queryset=Question.objects.filter(enabled=True),
+        widget=forms.CheckboxSelectMultiple()
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(TemplateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_tag = False
+        self.helper['questions'].wrap(Field, data_plugin="dragula")
+
     class Meta:
         model = Template
         fields = '__all__'
