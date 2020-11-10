@@ -299,6 +299,15 @@ class TemplateUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def dispatch(self, request, *args, **kwargs):
         return super(TemplateUpdate, self).dispatch(request)
 
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.questions.clear()
+        for question_id in self.request.POST.getlist('questions'):
+            question = Question.objects.get(pk=question_id)
+            self.object.questions.add(question)
+
+        return redirect(self.success_url)
+
 
 class TemplateDelete(LoginRequiredMixin, DeleteView):
     model = Template

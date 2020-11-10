@@ -34,7 +34,8 @@ class QuestionForm(forms.ModelForm):
 class TemplateForm(forms.ModelForm):
     questions = forms.ModelMultipleChoiceField(
         queryset=Question.objects.filter(enabled=True),
-        widget=forms.CheckboxSelectMultiple()
+        widget=forms.CheckboxSelectMultiple(),
+        required=False
     )
 
     def __init__(self, *args, **kwargs):

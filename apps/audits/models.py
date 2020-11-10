@@ -1,4 +1,5 @@
 from django.db import models
+from sortedm2m.fields import SortedManyToManyField
 
 from moss_internal_portal.mixins import UUIDPrimaryKeyMixin, CreatedModifiedMixin
 from apps.representatives.models import Representative
@@ -33,7 +34,7 @@ class Question(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
 class Template(UUIDPrimaryKeyMixin, CreatedModifiedMixin):
     category = models.CharField(max_length=50, blank=True, null=True)
     name = models.CharField(max_length=150)
-    questions = models.ManyToManyField(Question, blank=True)
+    questions = SortedManyToManyField(Question, blank=True)
     enabled = models.BooleanField(default=True)
 
     def __str__(self):
