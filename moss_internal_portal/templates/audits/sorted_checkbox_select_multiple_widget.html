@@ -1,0 +1,17 @@
+{% load i18n static %}
+
+<div data-plugin="dragula" class="border p-2">
+    {% for row in selected %}
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="questions" id="{{row.label_id}}" value="{{row.option_value}}" checked="">
+            <label class="custom-control-label" for="{{row.label_id}}"> {{ row.option_label }} </label>
+        </div>
+    {% endfor %}
+
+    {% for row in unselected %}
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="questions" id="{{row.label_id}}" value="{{row.option_value}}">
+            <label class="custom-control-label" for="{{row.label_id}}"> {{ row.option_label }} </label>
+        </div>
+    {% endfor %}
+</div>

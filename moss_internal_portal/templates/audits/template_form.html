@@ -9,15 +9,6 @@
 </ol>
 {% endblock %}
 
-{% block css %}
-<style type="text/css">
-    #div_id_questions > div {
-        padding: 0.75rem !important;
-        border: 1px solid #dee2e6 !important;
-    }
-</style>
-{% endblock %}
-
 {% block content %}
 
 <div class="card">
@@ -31,9 +22,29 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-7">
+                {{form.errors}}
                 <form method="post" action="{% if entity.id %}{% url 'audits:template-update' entity.id %}{% else %}{% url 'audits:template-create' %}{% endif %}">
                     {% csrf_token %}
-                    {% crispy form %}
+                    <div id="div_id_category" class="form-group">
+                        <label for="id_category" class=""> Category </label>
+                        {{ form.category }}
+                    </div>
+                    <div id="div_id_name" class="form-group">
+                        <label for="id_name" class=" requiredField"> Name<span class="asteriskField">*</span> </label>
+                        {{ form.name }}
+                    </div>
+
+                    <div id="div_id_questions" class="form-group">
+                        <label for="" class=" requiredField">Questions <span class="font-italic small">(Choose items and order by drag & drop.)</span></label>
+                        {{ form.questions }}
+                    </div>
+
+                    <div class="form-group">
+                        <div id="div_id_enabled" class="custom-control custom-checkbox">
+                            {{ form.enabled }}
+                            <label for="id_enabled" class="custom-control-label"> Enabled </label>
+                        </div>
+                    </div>
 
                     {% if entity.id %}
                         <button type="submit" class="btn btn-success btn-sm">Update</button>
