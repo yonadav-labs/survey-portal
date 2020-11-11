@@ -22,7 +22,11 @@
         <dt class="col-sm-3 col-lg-2 mb-2">Name</dt>
         <dd class="col-sm-9">{{ entity.name }}</dd>
         <dt class="col-sm-3 col-lg-2 mb-2">Questions</dt>
-        <dd class="col-sm-9">{{ entity.questions.all|join:", " }}</dd>
+        <dd class="col-sm-9">
+          {% for question in entity.questions.all %}
+            <div><span class="font-weight-bold">{{forloop.counter}}</span>. {{question}}</div>
+          {% endfor %}
+        </dd>
         <dt class="col-sm-3 col-lg-2 mb-2">Enabled</dt>
         <dd class="col-sm-9">{{ entity.enabled|yesno|title }}</dd>
       </dl>

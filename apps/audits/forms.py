@@ -125,12 +125,6 @@ class TemplateForm(forms.ModelForm):
         required=False
     )
 
-    # def __init__(self, *args, **kwargs):
-    #     super(TemplateForm, self).__init__(*args, **kwargs)
-    #     self.helper = FormHelper(self)
-    #     self.helper.form_tag = False
-    #     self.helper['questions'].wrap(Field, data_plugin="dragula")
-
     class Meta:
         model = Template
         fields = '__all__'
