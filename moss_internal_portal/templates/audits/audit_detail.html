@@ -26,9 +26,7 @@
         <dt class="col-sm-3 col-lg-2 mb-2">Phone</dt>
         <dd class="col-sm-9">{{ entity.phone }}</dd>
         <dt class="col-sm-3 col-lg-2 mb-2">Department</dt>
-        <dd class="col-sm-9">{{ entity.department }}</dd>
-        <dt class="col-sm-3 col-lg-2 mb-2">Questions</dt>
-        <dd class="col-sm-9">{{ entity.template.questions.all|join:", " }}</dd>
+        <dd class="col-sm-9">{{ entity.department|default:"" }}</dd>
         <dt class="col-sm-3 col-lg-2 mb-2">Notes</dt>
         <dd class="col-sm-9" style="white-space: pre-wrap;">{{ entity.notes }}</dd>
         <dt class="col-sm-3 col-lg-2 mb-2">Attachments</dt>
@@ -44,10 +42,10 @@
           {% endfor %}  
         </dd>
       </dl>
-      <h4 class="text-primary mb-3">Audit Answers</h4>
+      <h4 class="text-primary mb-3">Audit Questions and Answers</h4>
       <dl class="row">
         {% for question in entity.template.questions.all %}
-          <dt class="col-sm-3 col-lg-2 mb-2">{{question.name}}</dt>
+          <dt class="col-sm-3 col-lg-2 mb-2">{{forloop.counter}}. {{question}}</dt>
           <dd class="col-sm-9">
             {{question|answer:entity}}
           </dd>
