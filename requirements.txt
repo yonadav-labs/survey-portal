@@ -6,3 +6,4 @@ django-import-export
 django-sortedm2m
 boto3
 django-storages
+gunicorn
