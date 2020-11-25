@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block breadcrumb %}
 <ol class="breadcrumb m-0">
@@ -68,5 +69,5 @@
 {% endblock %}
 
 {% block js %}
-    <script src="/static/js/attachment.js"></script>
+    <script src="{% static 'js/attachment.js'%}"></script>
 {% endblock %}

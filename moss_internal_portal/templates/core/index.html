@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="row">
@@ -499,5 +500,5 @@
 {% endblock %}
 
 {% block js %}
-  <script src="/static/js/pages/demo.dashboard.js"></script>
+  <script src="{% static 'js/pages/demo.dashboard.js'%}"></script>
 {% endblock %}
